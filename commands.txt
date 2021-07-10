@@ -1,0 +1,102 @@
+First open powershell then write mongod command and then open second powershell then write mongo command.
+In mongo powershell write all these commands.
+You can create database by using MongoDBCompass:
+Step 1. Go to MongoDBCompass.
+Step 2. Click on Fill in connection fields individually.
+Step 3. Then press connect button.
+Step 4. Press Create Database button. To create database.
+Step 5. Then run these following commands.
+
+1. Database Commands
+-> For View all databases:
+show dbs
+
+-> For Create a new or switch databases: 
+use dbName
+
+-> For View current Database:
+db
+
+-> For Delete Database: 
+db.dropDatabase()
+
+2. Collection Commands
+-> For Show Collections:
+show collections
+
+-> For Create a collection named 'comments':
+db.createCollection('comments')
+
+-> For Create a collection named 'comments':
+db.comments.drop()
+
+3. Row(Document) Commands
+-> For Show all Rows in a Collection: 
+db.comments.find()
+
+-> For Show all Rows in a Collection (Prettified):
+db.comments.find().pretty()
+
+-> For Find the first row matching the object:
+db.comments.findOne({name: 'Harry'})
+
+ 
+-> Insert One Row:
+db.comments.insert({
+    'name': 'Arpan',
+    'lang': 'JavaScript',
+    'member_since': 5
+})
+
+-> Insert many Rows:
+db.comments.insertMany([{
+    'name': 'Arpan',
+    'lang': 'JavaScript',
+    'member_since': 5
+    }, 
+    {'name': 'Rohan',
+    'lang': 'Python',
+    'member_since': 3
+    },
+    {'name': 'Lovish',
+    'lang': 'Java',
+    'member_since': 4
+}])
+
+-> Search in a MongoDb Database:
+db.comments.find({lang:'Python'})
+
+-> Limit the number of rows in output:
+db.comments.find().limit(2)
+
+-> Count the number of rows in the output:
+db.comments.find().count()
+
+ 
+-> Update a row:
+db.comments.update({name: 'Shubham'},
+{'name': 'Arpan',
+    'lang': 'JavaScript',
+    'member_since': 51
+}, {upsert: true})
+
+-> Mongodb Increment Operator:
+db.comments.update({name: 'Rohan'},
+{$inc:{
+    member_since: 2
+}})
+
+->Mongodb Rename Operator:
+db.comments.update({name: 'Rohan'},
+{$rename:{
+    member_since: 'member'
+}})
+
+->Delete Row: 
+db.comments.remove({name: 'Harry'})
+
+-> Less than/Greater than/ Less than or Eq/Greater than or Eq:
+db.comments.find({member_since: {$lt: 90}})
+db.comments.find({member_since: {$lte: 90}})
+db.comments.find({member_since: {$gt: 90}})
+db.comments.find({member_since: {$gte: 90}})
